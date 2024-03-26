@@ -20,6 +20,7 @@ start_openclash() {
     else
         echo -e "[`date +%Y-%m-%d' '%H:%M:%S`] ${YELLOW}Info!${NC} OpenClash has started."
     fi
+    sleep $WAIT_TIME
 }
 
 stop_openclash() {
@@ -31,6 +32,7 @@ stop_openclash() {
     else
         echo -e "[`date +%Y-%m-%d' '%H:%M:%S`] ${YELLOW}Info!${NC} OpenClash has stopped."
     fi
+    sleep $WAIT_TIME
 }
 
 enable_airplane_mode() {
@@ -64,7 +66,7 @@ get_internet() {
                 disable_airplane_mode
                 # Start OpenClash
                 start_openclash
-                $COUNT=0
+                COUNT=0
             fi
         fi
         sleep $WAIT_TIME
