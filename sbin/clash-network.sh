@@ -50,12 +50,13 @@ disable_airplane_mode() {
 get_internet() {
     local HOST="$1"
     while true; do
-        if wget -q --spider -T 10 "$HOST"; then
+        if curl --output /dev/null --silent --head --fail -m 10 "$HOST" > /dev/null 2>&1; then
             COUNT=0
             echo -e "[`date +%Y-%m-%d' '%H:%M:%S`] ${GREEN}Success!${NC} Connect with ${YELLOW}$HOST${NC}."
         else
             COUNT=$((COUNT + 1))
             echo -e "[`date +%Y-%m-%d' '%H:%M:%S`] ${RED}Error!${NC} Disconnect from ${YELLOW}$HOST${NC}."
+            sleep $WAIT_TIME
             if [ $COUNT -ge 5 ]; then
                 echo -e "[`date +%Y-%m-%d' '%H:%M:%S`] ${RED}Error!${NC} Failed to connect to the internet."
                 # Stop OpenClash
